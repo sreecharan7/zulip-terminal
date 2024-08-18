@@ -844,7 +844,7 @@ class TestModel:
 
         result = model.send_private_message(recipients, content)
 
-        req = dict(type="private", to=recipients, content=content, read_by_sender=True)
+        req = dict(type="private", to=recipients, content=content)
         self.client.send_message.assert_called_once_with(req)
 
         assert result == return_value
@@ -881,13 +881,7 @@ class TestModel:
 
         result = model.send_stream_message(stream, topic, content)
 
-        req = dict(
-            type="stream",
-            to=stream,
-            subject=topic,
-            content=content,
-            read_by_sender=True,
-        )
+        req = dict(type="stream", to=stream, subject=topic, content=content)
         self.client.send_message.assert_called_once_with(req)
 
         assert result == return_value
